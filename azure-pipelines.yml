@@ -38,8 +38,9 @@ steps:
   displayName: 'Write build info'
   workingDirectory: $(wwwRootDir)
 
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- template: templates/build.yml
+  parameters:
+    buildConfiguration: 'Release'
 
 - task: DotNetCoreCLI@2
   displayName: 'Publish the project - Release'
