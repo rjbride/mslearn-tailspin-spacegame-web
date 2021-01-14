@@ -20,7 +20,7 @@ steps:
 - task: UseDotNet@2
   displayName: 'Use .NET Core SDK $(dotnetSdkVersion)'
   inputs:
-#    packageType: sdk
+    packageType: sdk
     version: $(dotnetSdkVersion)
 
 - task: Npm@1
@@ -38,13 +38,17 @@ steps:
   displayName: 'Write build info'
   workingDirectory: $(wwwRootDir)
 
-#- template: templates/build.yml
-#  parameters:
-#    buildConfiguration: 'Debug'
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
 
-- template: templates/build.yml
-  parameters:
-    buildConfiguration: 'Release'
+- task: DotNetCoreCLI@2
+  displayName: 'Publish the project - Release'
+  inputs:
+    command: 'publish'
+    projects: '**/*.csproj'
+    publishWebProjects: false
+    arguments: '--no-build --configuration Release --output $(Build.ArtifactStagingDirectory)/Release'
+    zipAfterPublish: true
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
