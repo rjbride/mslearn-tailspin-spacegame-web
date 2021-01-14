@@ -38,9 +38,9 @@ steps:
   displayName: 'Write build info'
   workingDirectory: $(wwwRootDir)
 
-- template: templates/build.yml
-  parameters:
-    buildConfiguration: 'Debug'
+#- template: templates/build.yml
+#  parameters:
+#    buildConfiguration: 'Debug'
 
 - template: templates/build.yml
   parameters:
