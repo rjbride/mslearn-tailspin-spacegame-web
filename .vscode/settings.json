@@ -1,0 +1,5 @@
+{
+    "trxviewer.enableSourceMaps": true,
+    "vim.useSystemClipboard": true,
+    "vim.visualstar": true
+}
